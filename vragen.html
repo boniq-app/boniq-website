@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BONIQ FAQ — Alles wat je wilt weten over digitale kassabonnen.">
+<title>Vragen — BONIQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;height:100%}
+:root{
+  --bl:#358BFF;--blh:#246ee0;--blp:#eef5ff;
+  --dk:#0d1117;--mid:#374151;--gr:#6b7280;--gr2:#9ca3af;
+  --bd:#e5e7eb;--bg:#f8fafc;--gn:#22c55e;
+  --nav-h:68px
+}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--dk);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:12px;left:50%;transform:translateX(-50%) translateZ(0);
+  z-index:900;width:calc(100% - 28px);max-width:1100px;height:56px;padding:0 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 2px 20px rgba(0,0,0,.06)
+}
+.nav-logo{text-decoration:none;display:flex;align-items:center}
+.nav-links{list-style:none;display:flex;gap:2px}
+.nav-links a{display:block;padding:7px 12px;border-radius:9px;font-size:.84rem;font-weight:500;color:var(--gr);text-decoration:none;white-space:nowrap;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--dk);background:rgba(0,0,0,.05)}
+.nav-links .ncta{background:var(--bl);color:#fff!important;font-weight:700!important}
+.nav-links .ncta:hover{background:var(--blh)!important}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.ham span{display:block;width:22px;height:2px;background:var(--dk);border-radius:2px;transition:all .3s}
+.mmenu{
+  display:none;position:fixed;inset:0;background:rgba(255,255,255,.98);
+  z-index:800;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem
+}
+.mmenu.open{display:flex}
+.mmenu a{font-size:1.5rem;font-weight:700;color:var(--dk);text-decoration:none}
+.mmenu .mncta{background:var(--bl);color:#fff!important;padding:12px 36px;border-radius:14px}
+.mclose{position:absolute;top:18px;right:18px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--dk);padding:8px}
+
+/* ─── HERO ────────────────────────────────────────────── */
+.hero{
+  padding:136px 6% 64px;
+  background:linear-gradient(150deg,#edf3ff 0%,#e6edff 45%,#f2f6ff 75%,#fafcff 100%);
+  position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 71px,rgba(53,139,255,.03) 72px),
+             repeating-linear-gradient(90deg,transparent,transparent 71px,rgba(53,139,255,.03) 72px);
+  pointer-events:none
+}
+.hero-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:3rem;flex-wrap:wrap}
+.hero-left{flex:1;min-width:260px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--blp);color:var(--bl);border-radius:100px;
+  padding:4px 14px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:1.2rem
+}
+.hero-badge::before{content:'';width:5px;height:5px;background:var(--bl);border-radius:50%}
+.hero h1{
+  font-size:clamp(3.5rem,8vw,6rem);font-weight:900;letter-spacing:-.05em;
+  color:var(--dk);line-height:.95;margin-bottom:.7rem
+}
+.hero-sub{font-size:clamp(1rem,1.4vw,1.1rem);color:var(--gr);line-height:1.7;max-width:400px}
+.hero-right{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.hero-stat{
+  background:rgba(255,255,255,.8);backdrop-filter:blur(8px);
+  border:1px solid var(--bd);border-radius:14px;padding:14px 20px;
+  display:flex;align-items:center;gap:14px;min-width:200px
+}
+.hs-num{font-size:1.5rem;font-weight:900;color:var(--bl);letter-spacing:-.03em}
+.hs-lbl{font-size:.76rem;color:var(--gr);line-height:1.35}
+
+/* ─── SEARCH BAR ──────────────────────────────────────── */
+.search-bar{
+  background:#fff;border-bottom:1px solid var(--bd);
+  position:sticky;top:80px;z-index:100;
+  padding:14px 6%
+}
+.search-inner{max-width:1060px;margin:0 auto;position:relative}
+.search-inner svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gr2);pointer-events:none}
+.search-inner input{
+  width:100%;padding:11px 16px 11px 44px;
+  border:1.5px solid var(--bd);border-radius:12px;
+  font-size:.9rem;font-family:inherit;color:var(--dk);background:var(--bg);
+  outline:none;transition:border-color .2s,box-shadow .2s
+}
+.search-inner input:focus{border-color:var(--bl);background:#fff;box-shadow:0 0 0 3px rgba(53,139,255,.09)}
+.search-inner input::placeholder{color:var(--gr2)}
+
+/* ─── LAYOUT ──────────────────────────────────────────── */
+.faq-layout{max-width:1060px;margin:0 auto;padding:48px 6% 100px;display:grid;grid-template-columns:240px 1fr;gap:3.5rem;align-items:start}
+
+/* ─── SIDEBAR NAV ─────────────────────────────────────── */
+.sidebar{position:sticky;top:148px}
+.sidebar-label{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gr2);margin-bottom:.8rem;padding:0 4px}
+.sn-btn{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:12px;border:none;cursor:pointer;
+  font-family:inherit;font-size:.88rem;font-weight:500;color:var(--gr);
+  background:none;transition:all .18s;text-align:left;margin-bottom:4px
+}
+.sn-btn:hover{background:var(--bg);color:var(--dk)}
+.sn-btn.active{background:var(--blp);color:var(--bl);font-weight:700}
+.sn-icon{font-size:1.05rem;flex-shrink:0;width:22px;text-align:center}
+.sn-label{flex:1}
+.sn-count{
+  font-size:.72rem;font-weight:700;background:var(--bd);color:var(--gr);
+  border-radius:100px;padding:2px 7px;min-width:22px;text-align:center;
+  transition:all .18s
+}
+.sn-btn.active .sn-count{background:rgba(53,139,255,.15);color:var(--bl)}
+.sidebar-divider{height:1px;background:var(--bd);margin:1rem 0}
+.sidebar-contact{
+  padding:14px 16px;background:var(--bg);border:1px solid var(--bd);
+  border-radius:12px;font-size:.82rem;color:var(--gr);line-height:1.5
+}
+.sidebar-contact strong{display:block;color:var(--dk);font-size:.85rem;margin-bottom:.3rem}
+.sidebar-contact a{color:var(--bl);text-decoration:none;font-weight:600}
+.sidebar-contact a:hover{text-decoration:underline}
+
+/* ─── PANELS ──────────────────────────────────────────── */
+.cat-panel{}
+.panel-head{
+  display:flex;align-items:center;gap:16px;
+  padding-bottom:1.6rem;margin-bottom:1.6rem;
+  border-bottom:2px solid var(--bd)
+}
+.panel-icon{font-size:2rem;flex-shrink:0}
+.panel-head h2{font-size:1.5rem;font-weight:900;letter-spacing:-.03em;color:var(--dk);margin-bottom:.18rem}
+.panel-tagline{font-size:.88rem;color:var(--gr)}
+
+/* ─── ACCORDION ───────────────────────────────────────── */
+.acc-list{display:flex;flex-direction:column;gap:0}
+.acc-item{border-bottom:1px solid var(--bd)}
+.acc-item:first-child{border-top:1px solid var(--bd)}
+.acc-item.hidden-search{display:none}
+.acc-btn{
+  width:100%;display:flex;align-items:center;gap:14px;
+  padding:18px 4px;background:none;border:none;cursor:pointer;
+  font-family:inherit;text-align:left;transition:background .15s;border-radius:8px;
+  margin:2px 0
+}
+.acc-btn:hover .acc-q{color:var(--bl)}
+.acc-num{
+  font-size:.72rem;font-weight:700;color:var(--gr2);letter-spacing:.06em;
+  min-width:28px;flex-shrink:0;font-variant-numeric:tabular-nums
+}
+.acc-q{
+  flex:1;font-size:.97rem;font-weight:600;color:var(--dk);
+  line-height:1.4;transition:color .15s
+}
+.acc-chevron{
+  flex-shrink:0;color:var(--gr2);transition:transform .25s,color .15s
+}
+.acc-item.open .acc-chevron{transform:rotate(180deg);color:var(--bl)}
+.acc-item.open .acc-q{color:var(--bl)}
+.acc-item.open .acc-num{color:var(--bl)}
+.acc-body{padding:0 4px 20px 42px}
+.acc-body p{font-size:.92rem;color:var(--mid);line-height:1.78}
+
+/* ─── PANEL CTA ───────────────────────────────────────── */
+.panel-cta{margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--bd)}
+.panel-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--dk);color:#fff;
+  padding:12px 22px;border-radius:12px;font-weight:700;font-size:.9rem;
+  text-decoration:none;transition:background .2s,transform .2s
+}
+.panel-cta-btn:hover{background:#1a2030;transform:translateY(-1px)}
+
+/* ─── NO RESULTS ──────────────────────────────────────── */
+.no-results{
+  display:none;text-align:center;padding:4rem 1rem;
+  color:var(--gr);font-size:.95rem;line-height:1.7
+}
+.no-results a{color:var(--bl);font-weight:600;text-decoration:none}
+
+/* ─── BANNER ──────────────────────────────────────────── */
+.still-banner{
+  background:var(--dk);border-radius:20px;
+  padding:3rem 3.5rem;text-align:center;
+  margin:0 6% 80px;max-width:1060px;
+  margin-left:auto;margin-right:auto
+}
+.still-banner h2{font-size:1.7rem;font-weight:900;color:#fff;letter-spacing:-.03em;margin-bottom:.6rem}
+.still-banner p{color:rgba(255,255,255,.6);font-size:.93rem;margin-bottom:2rem;line-height:1.6}
+.still-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.sb-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--bl);color:#fff;padding:12px 24px;border-radius:12px;
+  font-weight:700;font-size:.9rem;text-decoration:none;
+  box-shadow:0 4px 16px rgba(53,139,255,.3);transition:all .2s
+}
+.sb-primary:hover{background:var(--blh)}
+.sb-sec{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);
+  padding:12px 24px;border-radius:12px;font-weight:600;font-size:.9rem;
+  text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s
+}
+.sb-sec:hover{background:rgba(255,255,255,.14)}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer{background:#06080e;color:rgba(255,255,255,.42);padding:44px 6% 20px}
+.ft-g{max-width:1060px;margin:0 auto 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.3rem}
+.ft-d{font-size:.8rem;line-height:1.68;margin-top:.85rem;max-width:230px;color:rgba(255,255,255,.35)}
+.ft-h{color:#fff;font-size:.69rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.85rem}
+.ft-l{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.ft-l a{text-decoration:none;color:rgba(255,255,255,.4);font-size:.81rem;transition:color .15s;line-height:1.5;display:block}
+.ft-l a:hover{color:#fff}
+.ft-bot{max-width:1060px;margin:0 auto;border-top:1px solid rgba(255,255,255,.07);padding-top:1.1rem;display:flex;justify-content:space-between;align-items:center;font-size:.72rem;flex-wrap:wrap;gap:.9rem}
+.ft-sc{display:flex;gap:6px}
+.fts{width:29px;height:29px;background:rgba(255,255,255,.06);border-radius:6px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,.4);font-size:.71rem;font-weight:700;transition:all .15s}
+.fts:hover{background:var(--bl);color:#fff}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:860px){
+  .faq-layout{grid-template-columns:1fr;gap:2rem}
+  .sidebar{position:static;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--bd);padding-bottom:1rem}
+  .sidebar-label,.sidebar-divider,.sidebar-contact{display:none}
+  .sn-btn{
+    flex:none;padding:8px 14px;border:1.5px solid var(--bd);border-radius:100px;
+    font-size:.82rem;margin-bottom:0
+  }
+  .sn-btn.active{border-color:var(--bl);background:var(--blp)}
+  .sn-count{display:none}
+  .hero-right{display:none}
+  .still-banner{padding:2rem 1.5rem;margin:0 4% 60px}
+  .still-banner h2{font-size:1.35rem}
+  .ft-g{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .nav-links{display:none}
+  .ham{display:flex}
+}
+@media(max-width:480px){
+  .hero h1{font-size:3rem}
+  .acc-body{padding-left:28px}
+  .ft-g{grid-template-columns:1fr}
+}
+
+/* highlight */
+mark{background:rgba(53,139,255,.12);color:inherit;border-radius:3px;padding:0 2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 40" height="34"><rect width="36" height="36" rx="8" y="2" fill="#358BFF"/><polyline points="9,21 15,28 27,13" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="28" font-family="Inter,sans-serif" font-weight="900" font-size="22" fill="#0d1117" letter-spacing="-0.5">BONIQ</text></svg></a>
+  <ul class="nav-links">
+    <li><a href="index.html#vo">Voor organisaties</a></li>
+    <li><a href="index.html#vc">Voor consumenten</a></li>
+    <li><a href="index.html#oo">Over ons</a></li>
+    <li><a href="index.html#bl">Blog</a></li>
+    <li><a href="index.html#co" class="ncta">Contact</a></li>
+  </ul>
+  <button class="ham" id="hamBtn"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <button class="mclose" id="mclose">&#10005;</button>
+  <a href="index.html#vo">Voor organisaties</a>
+  <a href="index.html#vc">Voor consumenten</a>
+  <a href="index.html#oo">Over ons</a>
+  <a href="index.html#bl">Blog</a>
+  <a href="index.html#co" class="mncta">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">FAQ</div>
+      <h1>Vragen</h1>
+      <p class="hero-sub">Alles wat je moet weten over BONIQ. Kort, direct, geen gedoe.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div><div class="hs-num">30</div><div class="hs-lbl">vragen<br>beantwoord</div></div>
+      </div>
+      <div class="hero-stat">
+        <div><div class="hs-num">2,5 mrd</div><div class="hs-lbl">bonnen per jaar<br>in Nederland</div></div>
+      </div>
+      <div class="hero-stat">
+        <div><div class="hs-num">&#60; 2s</div><div class="hs-lbl">om een bon<br>te versturen</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-inner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Zoek een vraag, bijv. 'gratis' of 'kassasysteem'&hellip;" autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<!-- FAQ LAYOUT -->
+<div class="faq-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Categorieën</div>
+    
+    <button class="sn-btn active" data-cat="consumenten">
+      <span class="sn-icon">&#128241;</span>
+      <span class="sn-label">Voor consumenten</span>
+      <span class="sn-count">9</span>
+    </button>
+    <button class="sn-btn " data-cat="winkels">
+      <span class="sn-icon">&#127978;</span>
+      <span class="sn-label">Voor winkels & horeca</span>
+      <span class="sn-count">9</span>
+    </button>
+    <button class="sn-btn " data-cat="partners">
+      <span class="sn-icon">&#128187;</span>
+      <span class="sn-label">Kassaleveranciers & partners</span>
+      <span class="sn-count">6</span>
+    </button>
+    <button class="sn-btn " data-cat="algemeen">
+      <span class="sn-icon">&#9881;</span>
+      <span class="sn-label">Algemeen</span>
+      <span class="sn-count">6</span>
+    </button>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-contact">
+      <strong>Staat jouw vraag er niet bij?</strong>
+      Stuur ons een bericht via <a href="index.html#co">het contactformulier</a> of bel <a href="tel:+31853696747">+31 85 369 67 47</a>.
+    </div>
+  </aside>
+
+  <!-- PANELS -->
+  <div id="faqPanels">
+    
+    <div class="cat-panel" id="panel-consumenten">
+      <div class="panel-head">
+        <span class="panel-icon">&#128241;</span>
+        <div>
+          <h2>Voor consumenten</h2>
+          <p class="panel-tagline">Gemak. Vertrouwen. Geen gedoe.</p>
+        </div>
+      </div>
+      <div class="acc-list">
+        <div class="acc-item" data-num="01">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">01</span>
+            <span class="acc-q">Wat is BONIQ?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ is een app die je kassabonnen digitaal opslaat. Je toont een code bij de kassa na het betalen. De bon staat direct in je app. Geen papier meer.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="02">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-q">Hoe werkt het?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Je installeert de app eenmalig en krijgt een persoonlijke BONIQ-code. Die toon je na het betalen bij aangesloten winkels. Meer hoef je niet te doen.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="03">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">03</span>
+            <span class="acc-q">Moet ik iets doen bij de kassa?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Heel weinig. Je betaalt zoals altijd. Daarna toon je je BONIQ-code — dat duurt twee seconden. Het kassaproces verandert niet.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="04">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">04</span>
+            <span class="acc-q">Is BONIQ gratis?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. De BONIQ-app is gratis te downloaden en te gebruiken.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="05">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">05</span>
+            <span class="acc-q">Waar staan mijn bonnen?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>In de BONIQ-app, geordend op datum en winkel. Doorzoekbaar, filterbaar en altijd terug te vinden — ook jaren later.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="06">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">06</span>
+            <span class="acc-q">Wat als ik mijn telefoon niet bij me heb?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Je kunt je klantnummer ook mondeling doorgeven aan de kassa. De bon wordt dan alsnog aan je account gekoppeld.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="07">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">07</span>
+            <span class="acc-q">Is mijn data veilig?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. Gegevens worden AVG-conform opgeslagen in Nederland. We verkopen niets door. Geen reclame, geen tracking, geen uitzonderingen.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="08">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">08</span>
+            <span class="acc-q">Kan ik bonnen gebruiken voor retour of garantie?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. Je digitale bon geldt als aankoopbewijs, net als een papieren exemplaar. Je toont hem gewoon vanuit de app.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="09">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">09</span>
+            <span class="acc-q">Bij welke winkels werkt BONIQ?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Bij elke winkel die BONIQ heeft geactiveerd via hun kassasysteem. Je ziet in de app welke winkels zijn aangesloten. Het netwerk groeit continu.</p>
+          </div>
+        </div></div>
+      <div class="panel-cta">
+        <a href="index.html#co" class="panel-cta-btn">Download de app &rarr;</a>
+      </div>
+    </div>
+    <div class="cat-panel" id="panel-winkels" style="display:none">
+      <div class="panel-head">
+        <span class="panel-icon">&#127978;</span>
+        <div>
+          <h2>Voor winkels & horeca</h2>
+          <p class="panel-tagline">Geen gedoe. Geen training. Gewoon minder papier.</p>
+        </div>
+      </div>
+      <div class="acc-list">
+        <div class="acc-item" data-num="01">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">01</span>
+            <span class="acc-q">Wat is BONIQ voor mijn winkel?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ vervangt de papieren kassabon door een digitale versie die automatisch naar de app van de klant gaat. Jij hoeft niets extra's te doen aan de kassa.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="02">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-q">Wat kost BONIQ?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>De kosten hangen af van je kassasysteem en situatie. We stemmen dat samen af. In de praktijk bespaar je direct op papier, inkt en onnodige handelingen.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="03">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">03</span>
+            <span class="acc-q">Hoe werkt het aan de kassa?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>De klant betaalt zoals altijd. Daarna toont hij zijn BONIQ-code. Jij scant die, en de bon is verstuurd. Het kassaproces verandert niet.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="04">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">04</span>
+            <span class="acc-q">Moet mijn personeel iets veranderen?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Nauwelijks. Personeel vraagt na betaling of de klant een BONIQ-code heeft. Zo ja: scannen, klaar. Geen training nodig, geen extra tijd.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="05">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">05</span>
+            <span class="acc-q">Kost het tijd bij het afrekenen?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Nee. De BONIQ-code scannen duurt minder dan twee seconden. De wachtrij loopt niet op.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="06">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">06</span>
+            <span class="acc-q">Wat levert het mij op?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Je bespaart op papier en printkosten. Klanten hebben altijd hun bon bij de hand, wat retourprocessen soepeler maakt. En je doet iets goeds voor het milieu.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="07">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">07</span>
+            <span class="acc-q">Hoe activeer ik BONIQ voor mijn winkel?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Neem contact op via de website. We regelen de activatie via je kassaleverancier. Dat is doorgaans binnen drie werkdagen geregeld.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="08">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">08</span>
+            <span class="acc-q">Werkt BONIQ met mijn kassasysteem?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ is al live met MplusKASSA en groeit. Werkt jouw systeem er nog niet mee? Neem contact op — we kijken samen naar de opties.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="09">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">09</span>
+            <span class="acc-q">Moeten klanten verplicht de app gebruiken?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Nee. BONIQ werkt naast de papieren bon. Klanten met de app krijgen een digitale bon. Anderen krijgen gewoon hun papieren bonnetje.</p>
+          </div>
+        </div></div>
+      <div class="panel-cta">
+        <a href="index.html#co" class="panel-cta-btn">Activeer BONIQ &rarr;</a>
+      </div>
+    </div>
+    <div class="cat-panel" id="panel-partners" style="display:none">
+      <div class="panel-head">
+        <span class="panel-icon">&#128187;</span>
+        <div>
+          <h2>Kassaleveranciers & partners</h2>
+          <p class="panel-tagline">Eén koppeling. Heel je netwerk.</p>
+        </div>
+      </div>
+      <div class="acc-list">
+        <div class="acc-item" data-num="01">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">01</span>
+            <span class="acc-q">Wat doet BONIQ binnen een kassasysteem?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ functioneert als een infrastructuurlaag tussen het kassasysteem en de BONIQ-app van de consument. Bondata gaat automatisch naar de juiste gebruiker — zonder aanpassing aan het kassaproces.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="02">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-q">Hoe werkt de koppeling technisch?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ koppelt via een REST API aan het kassasysteem. De kassaleverancier implementeert dit eenmalig. Alle aangesloten winkels profiteren daarna automatisch.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="03">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">03</span>
+            <span class="acc-q">Hoe complex is de integratie?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Niet complex. De gemiddelde integratietijd is één tot drie werkdagen. We begeleiden het volledige traject van documentatie tot go-live.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="04">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">04</span>
+            <span class="acc-q">Wat levert de samenwerking op voor partners?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Jij biedt je klanten direct een relevante feature: digitale kassabonnen. Één koppeling, heel je netwerk. Geen losse implementatie per klant.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="05">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">05</span>
+            <span class="acc-q">Ondersteunen jullie de implementatie?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. We begeleiden het technische traject van begin tot eind. Directe toegang tot het team tijdens de integratie.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="06">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">06</span>
+            <span class="acc-q">Is er een testomgeving beschikbaar?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. Er is een testomgeving beschikbaar zodat alles correct werkt voordat je live gaat.</p>
+          </div>
+        </div></div>
+      <div class="panel-cta">
+        <a href="index.html#co" class="panel-cta-btn">Neem contact op &rarr;</a>
+      </div>
+    </div>
+    <div class="cat-panel" id="panel-algemeen" style="display:none">
+      <div class="panel-head">
+        <span class="panel-icon">&#9881;</span>
+        <div>
+          <h2>Algemeen</h2>
+          <p class="panel-tagline">De grote vragen. Korte antwoorden.</p>
+        </div>
+      </div>
+      <div class="acc-list">
+        <div class="acc-item" data-num="01">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">01</span>
+            <span class="acc-q">Waarom digitale bonnen?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Nederland drukt 2,5 miljard kassabonnen per jaar. Meer dan de helft wordt nooit bekeken. Ze bevatten BPA, zijn niet recyclebaar en kosten onnodig geld. De digitale bon is de logische volgende stap.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="02">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-q">Is BONIQ veilig?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. Gegevens worden AVG-conform opgeslagen in Nederland. BONIQ verkoopt geen data en plaatst geen advertenties. Wat jij koopt, blijft van jou.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="03">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">03</span>
+            <span class="acc-q">Zijn klanten verplicht om BONIQ te gebruiken?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Nee. BONIQ werkt altijd naast de papieren bon. Wie de app wil gebruiken, doet dat. Wie dat niet wil, krijgt gewoon zijn papieren bon.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="04">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">04</span>
+            <span class="acc-q">Werkt BONIQ naast het papieren bonnetje?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Ja. Winkels kunnen BONIQ activeren zonder de papieren bon af te schaffen. Dat bepalen ze zelf.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="05">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">05</span>
+            <span class="acc-q">Voor wie is BONIQ bedoeld?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>Voor iedereen die aankopen doet en zijn bonnen wil bewaren. En voor elke winkel die wil stoppen met het printen van bonnen die toch worden weggegooid.</p>
+          </div>
+        </div>
+        <div class="acc-item" data-num="06">
+          <button class="acc-btn" aria-expanded="false">
+            <span class="acc-num">06</span>
+            <span class="acc-q">Wanneer is BONIQ beschikbaar?</span>
+            <svg class="acc-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="acc-body" hidden>
+            <p>BONIQ is live. De koppeling met MplusKASSA is actief. We breiden continu uit met nieuwe kassapartners.</p>
+          </div>
+        </div></div>
+      <div class="panel-cta">
+        <a href="index.html#co" class="panel-cta-btn">Neem contact op &rarr;</a>
+      </div>
+    </div>
+    <div class="no-results" id="noResults">
+      <strong style="display:block;font-size:1rem;color:var(--dk);margin-bottom:.5rem">Geen resultaten gevonden.</strong>
+      Stel je vraag direct via <a href="index.html#co">het contactformulier</a>.
+    </div>
+  </div>
+
+</div>
+
+<!-- STILL QUESTIONS -->
+<div class="still-banner">
+  <h2>Staat jouw vraag er niet bij?</h2>
+  <p>We beantwoorden je vraag graag persoonlijk. Stuur een bericht of bel ons direct.</p>
+  <div class="still-btns">
+    <a href="index.html#co" class="sb-primary">&#128140; Stuur een bericht</a>
+    <a href="tel:+31853696747" class="sb-sec">&#128222; +31 85 369 67 47</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-g">
+    <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 40" height="30"><rect width="36" height="36" rx="8" y="2" fill="#358BFF"/><polyline points="9,21 15,28 27,13" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="28" font-family="Inter,sans-serif" font-weight="900" font-size="22" fill="#fff" letter-spacing="-0.5">BONIQ</text></svg><p class="ft-d">De digitale standaard voor kassabonnen. BONIQ verbindt kassasystemen met veilige digitale opslag.</p></div>
+    <div><div class="ft-h">Navigatie</div><ul class="ft-l">
+      <li><a href="index.html#vo">Voor organisaties</a></li>
+      <li><a href="index.html#vc">Voor consumenten</a></li>
+      <li><a href="index.html#hw">Hoe het werkt</a></li>
+      <li><a href="index.html#oo">Over ons</a></li>
+    </ul></div>
+    <div><div class="ft-h">Contact</div><ul class="ft-l">
+      <li><a href="mailto:info@boniq.nl">info@boniq.nl</a></li>
+      <li><a href="tel:+31853696747">+31 85 369 67 47</a></li>
+      <li><a href="index.html#bl">Blog</a></li>
+      <li><a href="index.html#co">Contact</a></li>
+    </ul></div>
+    <div><div class="ft-h">Juridisch</div><ul class="ft-l">
+      <li><a href="index.html">Privacybeleid</a></li>
+      <li><a href="index.html">Cookiebeleid</a></li>
+      <li><a href="index.html">Algemene voorwaarden</a></li>
+    </ul></div>
+  </div>
+  <div class="ft-bot">
+    <span>&copy; 2026 BONIQ &nbsp;|&nbsp; KVK: 89851757</span>
+    <div class="ft-sc">
+      <a href="https://www.linkedin.com/company/108555873/" target="_blank" rel="noopener" class="fts">in</a>
+      <a href="https://www.instagram.com/boniq.app" target="_blank" rel="noopener" class="fts">ig</a>
+      <a href="https://www.facebook.com/share/1BAzyZc1TD/" target="_blank" rel="noopener" class="fts">fb</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── HAMBURGER ── */
+  var ham=document.getElementById('hamBtn'),mob=document.getElementById('mmenu'),mcl=document.getElementById('mclose');
+  if(ham)ham.addEventListener('click',function(){mob.classList.toggle('open');});
+  if(mcl)mcl.addEventListener('click',function(){mob.classList.remove('open');});
+
+  /* ── SIDEBAR TABS ── */
+  var snBtns=document.querySelectorAll('.sn-btn');
+  var panels=document.querySelectorAll('.cat-panel');
+  var currentCat='consumenten';
+
+  function showCat(id){
+    currentCat=id;
+    snBtns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-cat')===id);});
+    panels.forEach(function(p){p.style.display=p.id==='panel-'+id?'':'none';});
+    document.getElementById('searchInput').value='';
+    clearSearch();
+    // Scroll to panel on mobile
+    if(window.innerWidth<860){
+      var panel=document.getElementById('panel-'+id);
+      if(panel)setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'start'});},80);
+    }
+  }
+  snBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){showCat(btn.getAttribute('data-cat'));});
+  });
+
+  /* ── ACCORDION ── */
+  document.querySelectorAll('.acc-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.closest('.acc-item');
+      var body=item.querySelector('.acc-body');
+      var isOpen=item.classList.contains('open');
+      // Close siblings
+      var panel=item.closest('.cat-panel');
+      panel.querySelectorAll('.acc-item.open').forEach(function(o){
+        o.classList.remove('open');
+        o.querySelector('.acc-body').hidden=true;
+        o.querySelector('.acc-btn').setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        body.hidden=false;
+        btn.setAttribute('aria-expanded','true');
+        setTimeout(function(){item.scrollIntoView({behavior:'smooth',block:'nearest'});},60);
+      }
+    });
+  });
+  // Open first item of first panel
+  var firstItem=document.querySelector('#panel-consumenten .acc-item');
+  if(firstItem){
+    firstItem.classList.add('open');
+    firstItem.querySelector('.acc-body').hidden=false;
+    firstItem.querySelector('.acc-btn').setAttribute('aria-expanded','true');
+  }
+
+  /* ── SEARCH ── */
+  var searchEl=document.getElementById('searchInput');
+  var noRes=document.getElementById('noResults');
+  var searchTimer;
+
+  function clearSearch(){
+    document.querySelectorAll('.acc-item').forEach(function(i){i.classList.remove('hidden-search');});
+    noRes.style.display='none';
+    // Remove highlights
+    document.querySelectorAll('mark').forEach(function(m){
+      m.outerHTML=m.textContent;
+    });
+  }
+
+  function doSearch(q){
+    q=q.trim().toLowerCase();
+    if(!q){clearSearch();return;}
+    var total=0;
+    var firstMatchCat=null;
+    var catIds=['consumenten','winkels','partners','algemeen'];
+    catIds.forEach(function(catId){
+      var panel=document.getElementById('panel-'+catId);
+      var items=panel.querySelectorAll('.acc-item');
+      var catHit=false;
+      items.forEach(function(item){
+        var qEl=item.querySelector('.acc-q');
+        var aEl=item.querySelector('.acc-body p');
+        var qTxt=qEl.textContent.toLowerCase();
+        var aTxt=aEl.textContent.toLowerCase();
+        var match=qTxt.includes(q)||aTxt.includes(q);
+        item.classList.toggle('hidden-search',!match);
+        if(match){catHit=true;total++;}
+      });
+      if(catHit&&!firstMatchCat)firstMatchCat=catId;
+    });
+    if(firstMatchCat){
+      snBtns.forEach(function(b){b.classList.toggle('active',b.getAttribute('data-cat')===firstMatchCat);});
+      panels.forEach(function(p){p.style.display=p.id==='panel-'+firstMatchCat?'':'none';});
+      currentCat=firstMatchCat;
+    }
+    noRes.style.display=total===0?'block':'none';
+  }
+
+  searchEl.addEventListener('input',function(){
+    clearTimeout(searchTimer);
+    searchTimer=setTimeout(function(){doSearch(searchEl.value);},220);
+  });
+  searchEl.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){searchEl.value='';clearSearch();}
+  });
+
+})();
+</script>
+</body>
+</html>
