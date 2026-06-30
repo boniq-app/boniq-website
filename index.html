@@ -13,7 +13,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;color:var(--dk);background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 /* NAV */
-#nav{position:fixed;top:12px;left:50%;transform:translateX(-50%) translateZ(0);z-index:900;width:calc(100% - 28px);max-width:1100px;height:56px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+#nav{position:fixed;top:50px;left:50%;transform:translateX(-50%) translateZ(0);z-index:900;width:calc(100% - 28px);max-width:1100px;height:56px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 2px 20px rgba(0,0,0,.06)}
 .nav-logo{text-decoration:none;display:flex;align-items:center}
 .nav-links{list-style:none;display:flex;gap:2px}
 .nav-links a{display:block;padding:7px 12px;border-radius:9px;font-size:.84rem;font-weight:500;color:var(--gr);text-decoration:none;white-space:nowrap;transition:color .15s,background .15s}
@@ -314,9 +314,170 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
   .ft-g{grid-template-columns:1fr}
   section{padding:72px 4%}
 }
+
+/* ── COMPUTABLE NOMINATION ── */
+.nom-bar{
+  position:fixed;top:0;left:0;right:0;z-index:950;
+  background:linear-gradient(90deg,#0d1117 0%,#1a2035 50%,#0d1117 100%);
+  padding:8px 20px;display:flex;align-items:center;justify-content:center;gap:12px;
+  font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85);
+  border-bottom:1px solid rgba(53,139,255,.3);
+  animation:nom-slide 0.5s ease-out;
+}
+@keyframes nom-slide{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.nom-bar-badge{
+  background:var(--bl);color:#fff;border-radius:100px;
+  padding:2px 10px;font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;white-space:nowrap;flex-shrink:0
+}
+.nom-bar-text{white-space:nowrap}
+.nom-bar-text strong{color:#fff}
+.nom-bar a.nom-vote-btn{
+  background:var(--bl);color:#fff;
+  padding:5px 14px;border-radius:8px;font-size:.75rem;font-weight:700;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+  transition:background .2s,transform .2s;
+  box-shadow:0 2px 10px rgba(53,139,255,.35)
+}
+.nom-bar a.nom-vote-btn:hover{background:var(--blh);transform:scale(1.04)}
+.nom-bar-close{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);
+  font-size:1rem;padding:4px;line-height:1;transition:color .2s
+}
+.nom-bar-close:hover{color:#fff}
+
+/* Hero badge */
+.hero-nom-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  border:1px solid rgba(53,139,255,.2);border-radius:100px;
+  padding:6px 16px;font-size:.79rem;font-weight:600;color:var(--dk);
+  margin-bottom:1.4rem;box-shadow:0 4px 16px rgba(0,0,0,.08);
+  animation:badge-in .6s ease-out .2s both
+}
+@keyframes badge-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.hero-nom-badge .badge-dot{
+  width:7px;height:7px;background:var(--gn);border-radius:50%;
+  animation:pulse-dot 2s ease-in-out infinite
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.hero-nom-badge .badge-award{color:var(--bl);font-weight:700}
+
+/* Nomination section */
+#nom{
+  background:var(--dk);
+  padding:80px 5%;
+  position:relative;overflow:hidden
+}
+#nom::before{
+  content:'';position:absolute;
+  top:-120px;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(53,139,255,.12) 0%,transparent 65%);
+  pointer-events:none
+}
+#nom::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 71px,rgba(53,139,255,.04) 72px),
+             repeating-linear-gradient(90deg,transparent,transparent 71px,rgba(53,139,255,.04) 72px);
+  pointer-events:none
+}
+.nom-inner{
+  position:relative;z-index:1;max-width:1060px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center
+}
+.nom-left{}
+.nom-award-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(53,139,255,.15);border:1px solid rgba(53,139,255,.25);
+  color:var(--bl);border-radius:100px;
+  padding:5px 14px;font-size:.72rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:1.3rem
+}
+.nom-award-tag::before{content:'🏆';font-size:.85rem}
+.nom-h{
+  font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;
+  letter-spacing:-.03em;line-height:1.1;color:#fff;margin-bottom:.9rem
+}
+.nom-h em{color:var(--bl);font-style:normal}
+.nom-p{
+  font-size:.96rem;color:rgba(255,255,255,.55);line-height:1.78;margin-bottom:2rem;
+  max-width:420px
+}
+.nom-vote-big{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--bl);color:#fff;
+  padding:15px 30px;border-radius:14px;
+  font-weight:800;font-size:1rem;text-decoration:none;
+  box-shadow:0 6px 28px rgba(53,139,255,.4);
+  transition:background .2s,transform .2s,box-shadow .2s
+}
+.nom-vote-big:hover{
+  background:var(--blh);transform:translateY(-3px);
+  box-shadow:0 10px 36px rgba(53,139,255,.5)
+}
+.nom-deadline{
+  margin-top:1.1rem;font-size:.8rem;color:rgba(255,255,255,.35);
+  display:flex;align-items:center;gap:6px
+}
+.nom-deadline::before{content:'📅';font-size:.85rem}
+
+.nom-right{}
+.nom-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:2rem 2.2rem
+}
+.nom-card-top{
+  display:flex;align-items:center;gap:12px;
+  padding-bottom:1.2rem;margin-bottom:1.2rem;
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nom-trophy{font-size:2.2rem}
+.nom-card-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.18rem}
+.nom-card-sub{font-size:.8rem;color:rgba(255,255,255,.4)}
+.nom-cat{
+  background:rgba(53,139,255,.12);border:1px solid rgba(53,139,255,.2);
+  border-radius:10px;padding:.85rem 1rem;margin-bottom:.75rem
+}
+.nom-cat-label{font-size:.67rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.3rem}
+.nom-cat-value{font-size:.93rem;font-weight:700;color:var(--bl)}
+.nom-steps{display:flex;flex-direction:column;gap:.7rem;margin-top:1.4rem}
+.nom-step{display:flex;align-items:center;gap:.85rem;font-size:.84rem;color:rgba(255,255,255,.6)}
+.nom-step-num{
+  width:26px;height:26px;border-radius:50%;background:var(--bl);
+  color:#fff;font-size:.72rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+
+@media(max-width:760px){
+  .nom-bar-text{display:none}
+  .nom-inner{grid-template-columns:1fr;gap:2.5rem}
+  .nom-right{order:0}
+  .nom-left{order:1}
+}
+
+
+.nom-cat-mini{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:100px;padding:4px 13px;font-size:.74rem;font-weight:600;
+  color:rgba(255,255,255,.6);margin-bottom:1.6rem
+}
+.nom-cat-mini strong{color:#fff;font-weight:700}
+
 </style>
 </head>
 <body>
+
+
+<div class="nom-bar" id="nomBar">
+  <span class="nom-bar-badge">🏆 Genomineerd</span>
+  <span class="nom-bar-text">De digitale kassabon als nieuwe standaard &mdash; <strong>BONIQ is genomineerd voor de Computable Awards 2026</strong></span>
+  <a href="https://www.computable.nl/stem-aanmelden/" target="_blank" rel="noopener" class="nom-vote-btn">Stem nu →</a>
+  <button class="nom-bar-close" id="nomBarClose" aria-label="Sluiten">&#10005;</button>
+</div>
 
 <nav id="nav">
   <a href="#home" class="nav-logo" id="navLogo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 40" height="34"><rect width="36" height="36" rx="8" y="2" fill="#358BFF"/><polyline points="9,21 15,28 27,13" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="46" y="28" font-family="Inter,sans-serif" font-weight="900" font-size="22" fill="#0d1117" letter-spacing="-0.5">BONIQ</text></svg></a>
@@ -343,6 +504,10 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
 
 <section id="home">
   <div class="hero-in">
+    <div class="hero-nom-badge">
+      <span class="badge-dot"></span>
+      <span>🏆 Genomineerd voor Computable Awards 2026 &mdash; stem nu</span>
+    </div>
     <h1>Digitale kassabonnen.<br><em>Zonder aanpassing<br>aan het betaalproces.</em></h1>
     <p class="hero-p">De infrastructuurlaag die kassasystemen verbindt met een veilige digitale bon. Geen aanpassing van het kassaproces, geen extra handelingen voor personeel.</p>
     <div class="btn-row">
@@ -369,6 +534,45 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
   <span class="tk-i">AVG-compliant opslag<span class="tk-d"></span></span>
   <span class="tk-i">Snel operationeel<span class="tk-d"></span></span>
 </div></div>
+<section id="nom">
+  <div class="nom-inner">
+    <div class="nom-left">
+      <div class="nom-award-tag">🏆 Genomineerd voor de Computable Awards 2026</div>
+      <h2 class="nom-h">De digitale kassabon<br>verdient een nieuwe<br>standaard.<br><em>Die standaard bouwen wij.</em></h2>
+      <div class="nom-cat-mini">Categorie: <strong>Duurzaamheid &amp; MVO</strong></div>
+      <p class="nom-p">BONIQ &amp; JAM-IT zijn genomineerd voor de Computable Awards 2026 in de categorie Duurzaamheid &amp; MVO. Een mooie erkenning voor onze missie om papieren kassabonnen structureel te vervangen door een privacyvriendelijk digitaal alternatief. Stemmen duurt minder dan 30 seconden.</p>
+      <a href="https://www.computable.nl/stem-aanmelden/" target="_blank" rel="noopener" class="nom-vote-big">
+        Stem op BONIQ →
+      </a>
+      <div class="nom-deadline">📅 Deadline: 4 oktober 2026 &mdash; elke stem telt</div>
+    </div>
+    <div class="nom-right">
+      <div class="nom-card">
+        <div class="nom-card-top">
+          <span class="nom-trophy">🏆</span>
+          <div>
+            <div class="nom-card-title">Computable Awards 2026</div>
+            <div class="nom-card-sub">De toonaangevende ICT-award van Nederland</div>
+          </div>
+        </div>
+        <div class="nom-cat">
+          <div class="nom-cat-label">Genomineerde</div>
+          <div class="nom-cat-value">BONIQ &amp; JAM-IT</div>
+        </div>
+        <div class="nom-cat">
+          <div class="nom-cat-label">Categorie</div>
+          <div class="nom-cat-value">Duurzaamheid &amp; MVO</div>
+        </div>
+        <div class="nom-steps">
+          <div class="nom-step"><span class="nom-step-num">1</span>Klik op "Stem op BONIQ"</div>
+          <div class="nom-step"><span class="nom-step-num">2</span>Ga naar Duurzaamheid &amp; MVO</div>
+          <div class="nom-step"><span class="nom-step-num">3</span>Selecteer BONIQ &amp; JAM-IT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section id="st">
   <div class="st-in">
@@ -560,8 +764,8 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
     <p class="oo-p">Dat is de paradox die wij bij BONIQ wilden oplossen. Niet met een loyaltyprogramma of marketingtool, maar met echte infrastructuur die naadloos aansluit op bestaande kassasystemen, zonder dat er ook maar iets verandert aan het betaalproces.</p>
     <p class="oo-p">BONIQ is opgericht vanuit &eacute;&eacute;n overtuiging: de kassabon hoort digitaal te zijn. Niet als toevoeging, maar als standaard. Schaalbaar, veilig en zonder dataverkoop.</p>
     <div class="st3">
-      <div class="st3-i"><div class="st3-n">2,5 mrd</div><div class="st3-l">Kassabonnen worden jaarlijks geprint in Nederland</div></div>
-      <div class="st3-i"><div class="st3-n">10.000 t</div><div class="st3-l">Thermisch papier, niet recyclebaar en bevat BPA</div></div>
+      <div class="st3-i"><div class="st3-n">2,5 miljard</div><div class="st3-l">Kassabonnen worden jaarlijks geprint in Nederland</div></div>
+      <div class="st3-i"><div class="st3-n">10.000+ ton</div><div class="st3-l">Thermisch papier, niet recyclebaar en bevat BPA</div></div>
       <div class="st3-i"><div class="st3-n">100.000+</div><div class="st3-l">Bomen per jaar voor kassabonrollen gekapt</div></div>
     </div>
     <a href="#co" class="bb" id="oocta" style="display:inline-flex">Plan een kennismaking &rarr;</a>
@@ -575,8 +779,8 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
       <h2>De kassabon is<br><span>de laatste schakel.</span></h2>
       <p class="sub" style="margin-top:.8rem;margin-bottom:1.6rem">Nederland print jaarlijks 2,5 miljard kassabonnen. Elk thermisch bonnetje bevat BPA en is niet recyclebaar.</p>
       <div class="im-st">
-        <div class="im-si"><div class="im-n">2,5 mrd</div><div class="im-l">Kassabonnen per jaar</div></div>
-        <div class="im-si"><div class="im-n">10.000 t</div><div class="im-l">Thermisch papierafval</div></div>
+        <div class="im-si"><div class="im-n">2,5 miljard</div><div class="im-l">Kassabonnen per jaar</div></div>
+        <div class="im-si"><div class="im-n">10.000+ ton</div><div class="im-l">Thermisch papierafval</div></div>
         <div class="im-si"><div class="im-n">&#8364; 0,04</div><div class="im-l">Kostprijs per papieren bon</div></div>
         <div class="im-si"><div class="im-n">BPA-vrij</div><div class="im-l">Digitale bon bevat geen schadelijke stoffen</div></div>
       </div>
@@ -1057,6 +1261,29 @@ footer{background:#06080e;color:rgba(255,255,255,.42);padding:48px 5% 22px}
     var lBack = document.getElementById('lBack');
     if (bBack) bBack.addEventListener('click', closeBlog);
     if (lBack) lBack.addEventListener('click', closeLegal);
+
+
+  /* ── NOMINATION BAR ── */
+  (function(){
+    var bar = document.getElementById('nomBar');
+    var closeBtn = document.getElementById('nomBarClose');
+    var nav = document.getElementById('nav');
+    if(!bar || !closeBtn) return;
+    if(sessionStorage.getItem('nomBarClosed')){
+      bar.style.display='none';
+      if(nav) nav.style.top='12px';
+    }
+    closeBtn.addEventListener('click', function(){
+      bar.style.transition='transform .3s ease-in, opacity .3s';
+      bar.style.opacity='0';
+      bar.style.transform='translateY(-100%)';
+      setTimeout(function(){
+        bar.style.display='none';
+        if(nav) nav.style.top='12px';
+      }, 300);
+      sessionStorage.setItem('nomBarClosed','1');
+    });
+  })();
 
     // ESC
     document.addEventListener('keydown', function(e) {
